@@ -1,0 +1,633 @@
+mysql> create table train 
+    -> (trainno int,
+    -> name varchar(10),
+    -> doj date,
+    -> seatno int,
+    -> age int,
+    -> fare int,
+    -> primary key(trainno));
+Query OK, 0 rows affected (0.32 sec)
+
+mysql> insert into train
+    -> ^C
+
+^C
+mysql> drop table train;
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> create table train  (trainno int, name varchar(10), class varchar(10), doj date, seatno int, age int, fare int, primary key(trainno));
+Query OK, 0 rows affected (0.29 sec)
+
+mysql> insert into train
+    -> values(1, 'ANU', 'I', '01-NOV-2015', 11, 16, 700);
+ERROR 1292 (22007): Incorrect date value: '01-NOV-2015' for column 'doj' at row 1
+mysql> insert into train values(1, 'ANU', 'I', '2015-NOV-01', 11, 16, 700);
+ERROR 1292 (22007): Incorrect date value: '2015-NOV-01' for column 'doj' at row 1
+mysql> insert into train values(1, 'ANU', 'I', '2015-11-01', 11, 16, 700);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into train values(2, 'SAGAR', 'AC-CHAIR', '2015-09-29', 34, 43, 1300);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into train values(3, 'SAMIR', 'AC-I', '2015-09-12', 78, 18, 9000);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into train values(4, 'GAURAV', 'AC-II', '2015-09-24', 78, 17, 600);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM TRAIN;
+ERROR 1146 (42S02): Table 'schoolcrap.TRAIN' doesn't exist
+mysql> SELECT * FROM train;
++---------+--------+----------+------------+--------+------+------+
+| trainno | name   | class    | doj        | seatno | age  | fare |
++---------+--------+----------+------------+--------+------+------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 |
+|       3 | SAMIR  | AC-I     | 2015-09-12 |     78 |   18 | 9000 |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     78 |   17 |  600 |
++---------+--------+----------+------------+--------+------+------+
+4 rows in set (0.00 sec)
+
+mysql> insert into train values(5, 'KRIPAL', 'I', '2015-09-07', 3, 25, 1700);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM train;
++---------+--------+----------+------------+--------+------+------+
+| trainno | name   | class    | doj        | seatno | age  | fare |
++---------+--------+----------+------------+--------+------+------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 |
+|       3 | SAMIR  | AC-I     | 2015-09-12 |     78 |   18 | 9000 |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     78 |   17 |  600 |
+|       5 | KRIPAL | I        | 2015-09-07 |      3 |   25 | 1700 |
++---------+--------+----------+------------+--------+------+------+
+5 rows in set (0.00 sec)
+
+mysql> insert into train values(4, 'GAURAV', 'AC-II', '2015-09-24', 23, 17, 600);
+ERROR 1062 (23000): Duplicate entry '4' for key 'PRIMARY'
+mysql> UPDATE train
+    -> SET seatno=23
+    -> WHERE trainno=4;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM train;
++---------+--------+----------+------------+--------+------+------+
+| trainno | name   | class    | doj        | seatno | age  | fare |
++---------+--------+----------+------------+--------+------+------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 |
+|       3 | SAMIR  | AC-I     | 2015-09-12 |     78 |   18 | 9000 |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 |
+|       5 | KRIPAL | I        | 2015-09-07 |      3 |   25 | 1700 |
++---------+--------+----------+------------+--------+------+------+
+5 rows in set (0.00 sec)
+
+mysql> insert into train values(6, 'ANKUR', 'II', '2015-12-31', 6, 20, 500);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into train values(7, 'PRIYA', 'AC-II', '2015-12-31', 2, 11, 1200);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> SELECT * FROM train;
++---------+--------+----------+------------+--------+------+------+
+| trainno | name   | class    | doj        | seatno | age  | fare |
++---------+--------+----------+------------+--------+------+------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 |
+|       3 | SAMIR  | AC-I     | 2015-09-12 |     78 |   18 | 9000 |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 |
+|       5 | KRIPAL | I        | 2015-09-07 |      3 |   25 | 1700 |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 |
++---------+--------+----------+------------+--------+------+------+
+7 rows in set (0.00 sec)
+
+mysql> 
+
+mysql> select name,seatno from train
+    -> where class='II' and age>20;
+Empty set (0.00 sec)
+
+mysql> select trainno, seatno from train
+    -> where fare>900 and fare<1300;
++---------+--------+
+| trainno | seatno |
++---------+--------+
+|       7 |      2 |
++---------+--------+
+1 row in set (0.00 sec)
+
+mysql> select name from train
+    -> order by trainno asc;
++--------+
+| name   |
++--------+
+| ANU    |
+| SAGAR  |
+| SAMIR  |
+| GAURAV |
+| KRIPAL |
+| ANKUR  |
+| PRIYA  |
++--------+
+7 rows in set (0.00 sec)
+
+mysql> select min(trainno), max(trainno) from train;
++--------------+--------------+
+| min(trainno) | max(trainno) |
++--------------+--------------+
+|            1 |            7 |
++--------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select min(fare), max(fare) from train;
++-----------+-----------+
+| min(fare) | max(fare) |
++-----------+-----------+
+|       500 |      9000 |
++-----------+-----------+
+1 row in set (0.00 sec)
+
+mysql> insert into train
+    -> values(9, 'Ajay', 'II', 19, 20, 500);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> select distinct class from train;
++----------+
+| class    |
++----------+
+| I        |
+| AC-CHAIR |
+| AC-I     |
+| AC-II    |
+| II       |
++----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from train
+    -> where class='AC-*';
+Empty set (0.01 sec)
+
+mysql> select * from train where class='AC-%';
+Empty set (0.00 sec)
+
+mysql> select * from train where class='AC%';
+Empty set (0.00 sec)
+
+mysql> select * from train
+    -> where class like 'AC%';
++---------+--------+----------+------------+--------+------+------+
+| trainno | name   | class    | doj        | seatno | age  | fare |
++---------+--------+----------+------------+--------+------+------+
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 |
+|       3 | SAMIR  | AC-I     | 2015-09-12 |     78 |   18 | 9000 |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 |
++---------+--------+----------+------------+--------+------+------+
+4 rows in set (0.00 sec)
+
+mysql> alter table train
+    -> add dob date default current_date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'current_date' at line 2
+mysql> alter table train add dob date default current_timestamp;
+ERROR 1067 (42000): Invalid default value for 'dob'
+mysql> alter table train add dob date default curdate();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'curdate()' at line 1
+mysql> alter table train add dob date date();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'date()' at line 1
+mysql> alter table train add dob date;
+Query OK, 0 rows affected (0.71 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from train;
++---------+--------+----------+------------+--------+------+------+------+
+| trainno | name   | class    | doj        | seatno | age  | fare | dob  |
++---------+--------+----------+------------+--------+------+------+------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 | NULL |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 | NULL |
+|       3 | SAMIR  | AC-I     | 2015-09-12 |     78 |   18 | 9000 | NULL |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 | NULL |
+|       5 | KRIPAL | I        | 2015-09-07 |      3 |   25 | 1700 | NULL |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 | NULL |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 | NULL |
++---------+--------+----------+------------+--------+------+------+------+
+7 rows in set (0.00 sec)
+
+mysql> insert into train
+    -> values(*,*,*,*,*,*,*,CURRENT_DATE());
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*,*,*,*,*,*,*,CURRENT_DATE())' at line 2
+mysql> insert into train
+    -> ^C
+
+^C
+mysql> alter table train
+    -> drop column dob;
+Query OK, 0 rows affected (0.73 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from train;
++---------+--------+----------+------------+--------+------+------+
+| trainno | name   | class    | doj        | seatno | age  | fare |
++---------+--------+----------+------------+--------+------+------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 |
+|       3 | SAMIR  | AC-I     | 2015-09-12 |     78 |   18 | 9000 |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 |
+|       5 | KRIPAL | I        | 2015-09-07 |      3 |   25 | 1700 |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 |
++---------+--------+----------+------------+--------+------+------+
+7 rows in set (0.00 sec)
+
+mysql> alter table train
+    -> add dob timestamp default CURRENT_TIMESTAMP;
+Query OK, 0 rows affected (0.65 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from train;
++---------+--------+----------+------------+--------+------+------+---------------------+
+| trainno | name   | class    | doj        | seatno | age  | fare | dob                 |
++---------+--------+----------+------------+--------+------+------+---------------------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 | 2016-09-28 18:13:17 |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 | 2016-09-28 18:13:17 |
+|       3 | SAMIR  | AC-I     | 2015-09-12 |     78 |   18 | 9000 | 2016-09-28 18:13:17 |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 | 2016-09-28 18:13:17 |
+|       5 | KRIPAL | I        | 2015-09-07 |      3 |   25 | 1700 | 2016-09-28 18:13:17 |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 | 2016-09-28 18:13:17 |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 | 2016-09-28 18:13:17 |
++---------+--------+----------+------------+--------+------+------+---------------------+
+7 rows in set (0.00 sec)
+
+mysql> alter table train
+    -> delete
+
+^C
+mysql> delete from train
+    -> where doj<'2015-09-17';
+Query OK, 2 rows affected (0.06 sec)
+
+mysql> select * from train;
++---------+--------+----------+------------+--------+------+------+---------------------+
+| trainno | name   | class    | doj        | seatno | age  | fare | dob                 |
++---------+--------+----------+------------+--------+------+------+---------------------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 | 2016-09-28 18:13:17 |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 | 2016-09-28 18:13:17 |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 | 2016-09-28 18:13:17 |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 | 2016-09-28 18:13:17 |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 | 2016-09-28 18:13:17 |
++---------+--------+----------+------------+--------+------+------+---------------------+
+5 rows in set (0.00 sec)
+
+mysql> alter table train 
+    -> add gender char;
+Query OK, 0 rows affected (0.65 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc trainl
+    -> ^[[A
+desc trainl
+^C
+mysql> desc train;
++---------+-------------+------+-----+-------------------+-------+
+| Field   | Type        | Null | Key | Default           | Extra |
++---------+-------------+------+-----+-------------------+-------+
+| trainno | int(11)     | NO   | PRI | NULL              |       |
+| name    | varchar(10) | YES  |     | NULL              |       |
+| class   | varchar(10) | YES  |     | NULL              |       |
+| doj     | date        | YES  |     | NULL              |       |
+| seatno  | int(11)     | YES  |     | NULL              |       |
+| age     | int(11)     | YES  |     | NULL              |       |
+| fare    | int(11)     | YES  |     | NULL              |       |
+| dob     | timestamp   | NO   |     | CURRENT_TIMESTAMP |       |
+| gender  | char(1)     | YES  |     | NULL              |       |
++---------+-------------+------+-----+-------------------+-------+
+9 rows in set (0.00 sec)
+
+mysql> select * from train;
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+| trainno | name   | class    | doj        | seatno | age  | fare | dob                 | gender |
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 | 2016-09-28 18:13:17 | NULL   |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 | 2016-09-28 18:13:17 | NULL   |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 | 2016-09-28 18:13:17 | NULL   |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 | 2016-09-28 18:13:17 | NULL   |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 | 2016-09-28 18:13:17 | NULL   |
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update train
+    -> set gender='F'
+    -> where name='ANU';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update train set gender='M' where name='SAGAR';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update train set gender='M' where name='GAURAV';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update train set gender='M' where name='ANKUR';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update train set gender='F' where name='PRIYA';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from train;
++---------+--------+----------+------------+--------+------+------mysql> select name,seatno from train
+    -> where class='II' and age>20;
+Empty set (0.00 sec)
+
+mysql> select trainno, seatno from train
+    -> where fare>900 and fare<1300;
++---------+--------+
+| trainno | seatno |
++---------+--------+
+|       7 |      2 |
++---------+--------+
+1 row in set (0.00 sec)
+
+mysql> select name from train
+    -> order by trainno asc;
++--------+
+| name   |
++--------+
+| ANU    |
+| SAGAR  |
+| SAMIR  |
+| GAURAV |
+| KRIPAL |
+| ANKUR  |
+| PRIYA  |
++--------+
+7 rows in set (0.00 sec)
+
+mysql> select min(trainno), max(trainno) from train;
++--------------+--------------+
+| min(trainno) | max(trainno) |
++--------------+--------------+
+|            1 |            7 |
++--------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select min(fare), max(fare) from train;
++-----------+-----------+
+| min(fare) | max(fare) |
++-----------+-----------+
+|       500 |      9000 |
++-----------+-----------+
+1 row in set (0.00 sec)
+
+mysql> insert into train
+    -> values(9, 'Ajay', 'II', 19, 20, 500);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> select distinct class from train;
++----------+
+| class    |
++----------+
+| I        |
+| AC-CHAIR |
+| AC-I     |
+| AC-II    |
+| II       |
++----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from train
+    -> where class='AC-*';
+Empty set (0.01 sec)
+
+mysql> select * from train where class='AC-%';
+Empty set (0.00 sec)
+
+mysql> select * from train where class='AC%';
+Empty set (0.00 sec)
+
+mysql> select * from train
+    -> where class like 'AC%';
++---------+--------+----------+------------+--------+------+------+
+| trainno | name   | class    | doj        | seatno | age  | fare |
++---------+--------+----------+------------+--------+------+------+
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 |
+|       3 | SAMIR  | AC-I     | 2015-09-12 |     78 |   18 | 9000 |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 |
++---------+--------+----------+------------+--------+------+------+
+4 rows in set (0.00 sec)
+
+mysql> alter table train
+    -> add dob date default current_date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'current_date' at line 2
+mysql> alter table train add dob date default current_timestamp;
+ERROR 1067 (42000): Invalid default value for 'dob'
+mysql> alter table train add dob date default curdate();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'curdate()' at line 1
+mysql> alter table train add dob date date();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'date()' at line 1
+mysql> alter table train add dob date;
+Query OK, 0 rows affected (0.71 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from train;
++---------+--------+----------+------------+--------+------+------+------+
+| trainno | name   | class    | doj        | seatno | age  | fare | dob  |
++---------+--------+----------+------------+--------+------+------+------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 | NULL |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 | NULL |
+|       3 | SAMIR  | AC-I     | 2015-09-12 |     78 |   18 | 9000 | NULL |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 | NULL |
+|       5 | KRIPAL | I        | 2015-09-07 |      3 |   25 | 1700 | NULL |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 | NULL |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 | NULL |
++---------+--------+----------+------------+--------+------+------+------+
+7 rows in set (0.00 sec)
+
+mysql> insert into train
+    -> values(*,*,*,*,*,*,*,CURRENT_DATE());
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*,*,*,*,*,*,*,CURRENT_DATE())' at line 2
+mysql> insert into train
+    -> ^C
+
+^C
+mysql> alter table train
+    -> drop column dob;
+Query OK, 0 rows affected (0.73 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from train;
++---------+--------+----------+------------+--------+------+------+
+| trainno | name   | class    | doj        | seatno | age  | fare |
++---------+--------+----------+------------+--------+------+------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 |
+|       3 | SAMIR  | AC-I     | 2015-09-12 |     78 |   18 | 9000 |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 |
+|       5 | KRIPAL | I        | 2015-09-07 |      3 |   25 | 1700 |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 |
++---------+--------+----------+------------+--------+------+------+
+7 rows in set (0.00 sec)
+
+mysql> alter table train
+    -> add dob timestamp default CURRENT_TIMESTAMP;
+Query OK, 0 rows affected (0.65 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from train;
++---------+--------+----------+------------+--------+------+------+---------------------+
+| trainno | name   | class    | doj        | seatno | age  | fare | dob                 |
++---------+--------+----------+------------+--------+------+------+---------------------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 | 2016-09-28 18:13:17 |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 | 2016-09-28 18:13:17 |
+|       3 | SAMIR  | AC-I     | 2015-09-12 |     78 |   18 | 9000 | 2016-09-28 18:13:17 |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 | 2016-09-28 18:13:17 |
+|       5 | KRIPAL | I        | 2015-09-07 |      3 |   25 | 1700 | 2016-09-28 18:13:17 |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 | 2016-09-28 18:13:17 |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 | 2016-09-28 18:13:17 |
++---------+--------+----------+------------+--------+------+------+---------------------+
+7 rows in set (0.00 sec)
+
+mysql> alter table train
+    -> delete
+
+^C
+mysql> delete from train
+    -> where doj<'2015-09-17';
+Query OK, 2 rows affected (0.06 sec)
+
+mysql> select * from train;
++---------+--------+----------+------------+--------+------+------+---------------------+
+| trainno | name   | class    | doj        | seatno | age  | fare | dob                 |
++---------+--------+----------+------------+--------+------+------+---------------------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 | 2016-09-28 18:13:17 |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 | 2016-09-28 18:13:17 |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 | 2016-09-28 18:13:17 |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 | 2016-09-28 18:13:17 |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 | 2016-09-28 18:13:17 |
++---------+--------+----------+------------+--------+------+------+---------------------+
+5 rows in set (0.00 sec)
+
+mysql> alter table train 
+    -> add gender char;
+Query OK, 0 rows affected (0.65 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc trainl
+    -> ^[[A
+desc trainl
+^C
+mysql> desc train;
++---------+-------------+------+-----+-------------------+-------+
+| Field   | Type        | Null | Key | Default           | Extra |
++---------+-------------+------+-----+-------------------+-------+
+| trainno | int(11)     | NO   | PRI | NULL              |       |
+| name    | varchar(10) | YES  |     | NULL              |       |
+| class   | varchar(10) | YES  |     | NULL              |       |
+| doj     | date        | YES  |     | NULL              |       |
+| seatno  | int(11)     | YES  |     | NULL              |       |
+| age     | int(11)     | YES  |     | NULL              |       |
+| fare    | int(11)     | YES  |     | NULL              |       |
+| dob     | timestamp   | NO   |     | CURRENT_TIMESTAMP |       |
+| gender  | char(1)     | YES  |     | NULL              |       |
++---------+-------------+------+-----+-------------------+-------+
+9 rows in set (0.00 sec)
+
+mysql> select * from train;
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+| trainno | name   | class    | doj        | seatno | age  | fare | dob                 | gender |
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 | 2016-09-28 18:13:17 | NULL   |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 | 2016-09-28 18:13:17 | NULL   |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 | 2016-09-28 18:13:17 | NULL   |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 | 2016-09-28 18:13:17 | NULL   |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 | 2016-09-28 18:13:17 | NULL   |
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update train
+    -> set gender='F'
+    -> where name='ANU';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update train set gender='M' where name='SAGAR';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update train set gender='M' where name='GAURAV';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update train set gender='M' where name='ANKUR';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update train set gender='F' where name='PRIYA';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from train;
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+| trainno | name   | class    | doj        | seatno | age  | fare | dob                 | gender |
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 | 2016-09-28 18:13:17 | F      |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 | 2016-09-28 18:13:17 | M      |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 | 2016-09-28 18:13:17 | M      |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 | 2016-09-28 18:13:17 | M      |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 | 2016-09-28 18:13:17 | F      |
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update train
+    -> set fare=fare-(0.1*fare)
+    -> where gender='F';
+Query OK, 2 rows affected (0.06 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from train;
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+| trainno | name   | class    | doj        | seatno | age  | fare | dob                 | gender |
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  630 | 2016-09-28 18:13:17 | F      |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 | 2016-09-28 18:13:17 | M      |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 | 2016-09-28 18:13:17 | M      |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 | 2016-09-28 18:13:17 | M      |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1080 | 2016-09-28 18:13:17 | F      |
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> 
++---------------------+--------+
+| trainno | name   | class    | doj        | seatno | age  | fare | dob                 | gender |
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  700 | 2016-09-28 18:13:17 | F      |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 | 2016-09-28 18:13:17 | M      |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 | 2016-09-28 18:13:17 | M      |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 | 2016-09-28 18:13:17 | M      |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1200 | 2016-09-28 18:13:17 | F      |
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update train
+    -> set fare=fare-(0.1*fare)
+    -> where gender='F';
+Query OK, 2 rows affected (0.06 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from train;
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+| trainno | name   | class    | doj        | seatno | age  | fare | dob                 | gender |
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+|       1 | ANU    | I        | 2015-11-01 |     11 |   16 |  630 | 2016-09-28 18:13:17 | F      |
+|       2 | SAGAR  | AC-CHAIR | 2015-09-29 |     34 |   43 | 1300 | 2016-09-28 18:13:17 | M      |
+|       4 | GAURAV | AC-II    | 2015-09-24 |     23 |   17 |  600 | 2016-09-28 18:13:17 | M      |
+|       6 | ANKUR  | II       | 2015-12-31 |      6 |   20 |  500 | 2016-09-28 18:13:17 | M      |
+|       7 | PRIYA  | AC-II    | 2015-12-31 |      2 |   11 | 1080 | 2016-09-28 18:13:17 | F      |
++---------+--------+----------+------------+--------+------+------+---------------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> 
