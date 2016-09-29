@@ -1,0 +1,371 @@
+mysql> create table prepaid
+    -> ( cno int,
+    -> cname varchar(10),
+    -> model varchar(10),
+    -> connection varchar(10),
+    -> activation_date date,
+    -> validity_days int,
+    -> amt_paid int,
+    -> gender char(6),
+    -> primary key(cno));
+Query OK, 0 rows affected (0.39 sec)
+
+mysql> desc prepaid;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| cno             | int(11)     | NO   | PRI | NULL    |       |
+| cname           | varchar(10) | YES  |     | NULL    |       |
+| model           | varchar(10) | YES  |     | NULL    |       |
+| connection      | varchar(10) | YES  |     | NULL    |       |
+| activation_date | date        | YES  |     | NULL    |       |
+| validity_days   | int(11)     | YES  |     | NULL    |       |
+| amt_paid        | int(11)     | YES  |     | NULL    |       |
+| gender          | char(6)     | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into prepaid
+    -> values(1, 'Meetali', 'Nokia', 'Hutch', '2014-01-18', 365, 3300, 'Female');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into prepaid values(2, 'Raman', 'Nokia', 'Idea', '2013-12-10', 60, 3030, 'Male');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into prepaid values(3, 'Anupama', 'Samsung', 'Hutch', '2012-03-08', 365, 6030, 'Female');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into prepaid values(4, 'Sai Ram', 'Nokia', 'Idea', '2015-01-30', 180, 890, 'Male');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into prepaid values(5, 'Deepa', 'Samsung', 'Airtel', '2012-02-02', 180, 9000, 'Female');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into prepaid values(6, 'Karan', 'LG', 'AirCel', '2010-01-04', 60, 600, 'Male');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into prepaid values(7, 'Jayant', 'Nokia', 'Idea', '2013-02-12', 180, 8900, 'Male');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into prepaid values(8, 'Sita', 'LG', 'Hutch', '2012-05-14', 30, 300, 'Female');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into prepaid values(9, 'Ritesh', 'Sony', 'Idea', '2011-09-24', 90, 800, 'Male');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into prepaid values(10, 'Reena', 'Siemen', 'Airtel', '2009-10-16', 60, 5600, 'Female');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from prepaid;
++-----+---------+---------+------------+-----------------+---------------+----------+--------+
+| cno | cname   | model   | connection | activation_date | validity_days | amt_paid | gender |
++-----+---------+---------+------------+-----------------+---------------+----------+--------+
+|   1 | Meetali | Nokia   | Hutch      | 2014-01-18      |           365 |     3300 | Female |
+|   2 | Raman   | Nokia   | Idea       | 2013-12-10      |            60 |     3030 | Male   |
+|   3 | Anupama | Samsung | Hutch      | 2012-03-08      |           365 |     6030 | Female |
+|   4 | Sai Ram | Nokia   | Idea       | 2015-01-30      |           180 |      890 | Male   |
+|   5 | Deepa   | Samsung | Airtel     | 2012-02-02      |           180 |     9000 | Female |
+|   6 | Karan   | LG      | AirCel     | 2010-01-04      |            60 |      600 | Male   |
+|   7 | Jayant  | Nokia   | Idea       | 2013-02-12      |           180 |     8900 | Male   |
+|   8 | Sita    | LG      | Hutch      | 2012-05-14      |            30 |      300 | Female |
+|   9 | Ritesh  | Sony    | Idea       | 2011-09-24      |            90 |      800 | Male   |
+|  10 | Reena   | Siemen  | Airtel     | 2009-10-16      |            60 |     5600 | Female |
++-----+---------+---------+------------+-----------------+---------------+----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select * from prepaid
+    -> order by validity_days;
++-----+---------+---------+------------+-----------------+---------------+----------+--------+
+| cno | cname   | model   | connection | activation_date | validity_days | amt_paid | gender |
++-----+---------+---------+------------+-----------------+---------------+----------+--------+
+|   8 | Sita    | LG      | Hutch      | 2012-05-14      |            30 |      300 | Female |
+|   2 | Raman   | Nokia   | Idea       | 2013-12-10      |            60 |     3030 | Male   |
+|   6 | Karan   | LG      | AirCel     | 2010-01-04      |            60 |      600 | Male   |
+|  10 | Reena   | Siemen  | Airtel     | 2009-10-16      |            60 |     5600 | Female |
+|   9 | Ritesh  | Sony    | Idea       | 2011-09-24      |            90 |      800 | Male   |
+|   4 | Sai Ram | Nokia   | Idea       | 2015-01-30      |           180 |      890 | Male   |
+|   5 | Deepa   | Samsung | Airtel     | 2012-02-02      |           180 |     9000 | Female |
+|   7 | Jayant  | Nokia   | Idea       | 2013-02-12      |           180 |     8900 | Male   |
+|   1 | Meetali | Nokia   | Hutch      | 2014-01-18      |           365 |     3300 | Female |
+|   3 | Anupama | Samsung | Hutch      | 2012-03-08      |           365 |     6030 | Female |
++-----+---------+---------+------------+-----------------+---------------+----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select * from prepaid order by amount_paid;
+ERROR 1054 (42S22): Unknown column 'amount_paid' in 'order clause'
+mysql> select * from prepaid order by amt_paid;
++-----+---------+---------+------------+-----------------+---------------+----------+--------+
+| cno | cname   | model   | connection | activation_date | validity_days | amt_paid | gender |
++-----+---------+---------+------------+-----------------+---------------+----------+--------+
+|   8 | Sita    | LG      | Hutch      | 2012-05-14      |            30 |      300 | Female |
+|   6 | Karan   | LG      | AirCel     | 2010-01-04      |            60 |      600 | Male   |
+|   9 | Ritesh  | Sony    | Idea       | 2011-09-24      |            90 |      800 | Male   |
+|   4 | Sai Ram | Nokia   | Idea       | 2015-01-30      |           180 |      890 | Male   |
+|   2 | Raman   | Nokia   | Idea       | 2013-12-10      |            60 |     3030 | Male   |
+|   1 | Meetali | Nokia   | Hutch      | 2014-01-18      |           365 |     3300 | Female |
+|  10 | Reena   | Siemen  | Airtel     | 2009-10-16      |            60 |     5600 | Female |
+|   3 | Anupama | Samsung | Hutch      | 2012-03-08      |           365 |     6030 | Female |
+|   7 | Jayant  | Nokia   | Idea       | 2013-02-12      |           180 |     8900 | Male   |
+|   5 | Deepa   | Samsung | Airtel     | 2012-02-02      |           180 |     9000 | Female |
++-----+---------+---------+------------+-----------------+---------------+----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select count(*) from prepaid
+    -> where gender='Female';
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.03 sec)
+
+mysql> select distinct model from prepaid;
++---------+
+| model   |
++---------+
+| Nokia   |
+| Samsung |
+| LG      |
+| Sony    |
+| Siemen  |
++---------+
+5 rows in set (0.00 sec)
+
+mysql> select count(connection) from prepaid;
++-------------------+
+| count(connection) |
++-------------------+
+|                10 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select distinct count(connection) from prepaid;
++-------------------+
+| count(connection) |
++-------------------+
+|                10 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from prepaid
+    -> where model='Samsung' and model='Nokia';
++----------+
+| count(*) |
++----------+
+|        0 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from prepaid where model='Samsung' or model='Nokia';
++----------+
+| count(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select cname, connection, amt_paid from prepaid
+    -> order by amt_paid desc;
++---------+------------+----------+
+| cname   | connection | amt_paid |
++---------+------------+----------+
+| Deepa   | Airtel     |     9000 |
+| Jayant  | Idea       |     8900 |
+| Anupama | Hutch      |     6030 |
+| Reena   | Airtel     |     5600 |
+| Meetali | Hutch      |     3300 |
+| Raman   | Idea       |     3030 |
+| Sai Ram | Idea       |      890 |
+| Ritesh  | Idea       |      800 |
+| Karan   | AirCel     |      600 |
+| Sita    | Hutch      |      300 |
++---------+------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select model, count(model) from prepaid;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'schoolcrap.prepaid.model'; this is incompatible with sql_mode=only_full_group_by
+mysql> select connection from prepaid
+    -> where count(connection) > 2;
+ERROR 1111 (HY000): Invalid use of group function
+mysql> select model from prepaid
+    -> where connection='Idea';
++-------+
+| model |
++-------+
+| Nokia |
+| Nokia |
+| Nokia |
+| Sony  |
++-------+
+4 rows in set (0.00 sec)
+
+mysql> select max(validity_days), min(validity_days) from prepaid;
++--------------------+--------------------+
+| max(validity_days) | min(validity_days) |
++--------------------+--------------------+
+|                365 |                 30 |
++--------------------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(amt_paid), avg(amt_paid) from prepaid;
++---------------+---------------+
+| sum(amt_paid) | avg(amt_paid) |
++---------------+---------------+
+|         38450 |     3845.0000 |
++---------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(amt_paid), avg(amt_paid) from prepaid foreach(connection);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(connection)' at line 1
+mysql> `
+    `> lol`
+    -> 
+    -> 
+
+^C
+mysql> mysql> 
+mysql> mysql>
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql>' at line 1
+mysql> rajathacker
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rajathacker' at line 1
+mysql> ;
+ERROR: 
+No query specified
+
+mysql> select sum(amt_paid), avg(amt_paid)
+    -> from prepaid
+    -> group by connection;
++---------------+---------------+
+| sum(amt_paid) | avg(amt_paid) |
++---------------+---------------+
+|           600 |      600.0000 |
+|         14600 |     7300.0000 |
+|          9630 |     3210.0000 |
+|         13620 |     3405.0000 |
++---------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select sum(amt_paid), avg(amt_paid) from prepaid group by model;
++---------------+---------------+
+| sum(amt_paid) | avg(amt_paid) |
++---------------+---------------+
+|           900 |      450.0000 |
+|         16120 |     4030.0000 |
+|         15030 |     7515.0000 |
+|          5600 |     5600.0000 |
+|           800 |      800.0000 |
++---------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select max(amt_paid) from prepaid
+    -> where gender='Female';
++---------------+
+| max(amt_paid) |
++---------------+
+|          9000 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> update prepaid
+    -> set validity_days=validity_days + 10
+    -> where connection='Airtel' or connection='Idea' and gender='Male';
+Query OK, 6 rows affected (0.06 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+mysql> update
+    -> 
+
+^C
+mysql> update prepaid
+    -> set validity_days = validity_days - 8
+    -> where gender='Female';
+Query OK, 5 rows affected (0.05 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from prepaid
+    -> where cname='Sita' or cname='Reena' or cname='Raman' or cname='Sai Ram' or cname='Jayant';
++-----+---------+--------+------------+-----------------+---------------+----------+--------+
+| cno | cname   | model  | connection | activation_date | validity_days | amt_paid | gender |
++-----+---------+--------+------------+-----------------+---------------+----------+--------+
+|   2 | Raman   | Nokia  | Idea       | 2013-12-10      |            70 |     3030 | Male   |
+|   4 | Sai Ram | Nokia  | Idea       | 2015-01-30      |           190 |      890 | Male   |
+|   7 | Jayant  | Nokia  | Idea       | 2013-02-12      |           190 |     8900 | Male   |
+|   8 | Sita    | LG     | Hutch      | 2012-05-14      |            22 |      300 | Female |
+|  10 | Reena   | Siemen | Airtel     | 2009-10-16      |            62 |     5600 | Female |
++-----+---------+--------+------------+-----------------+---------------+----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> insert into prepaid
+    -> values(11, 'Vijay', 'Siemen', 'Reliance', '2005-02-04', 500, 3800, 'Male');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into prepaid values(12, 'Ajay', 'Sony', 'Airtel', '2004-03-18', NULL, NULL,NULL);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> alter table
+    -> add cust_type char default 'G';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add cust_type char default 'G'' at line 2
+mysql> alter table prepaid add cust_type char default 'G';
+Query OK, 0 rows affected (0.76 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table prepaid
+    -> change
+
+^C
+mysql> update prepaid
+    -> set connection='DoCoMo'
+    -> where connection='Hutch';
+Query OK, 3 rows affected (0.06 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select count(mobile) from prepaid
+    -> group by connection;
+ERROR 1054 (42S22): Unknown column 'mobile' in 'field list'
+mysql> select count(model) from prepaid group by connection;
++--------------+
+| count(model) |
++--------------+
+|            1 |
+|            3 |
+|            3 |
+|            4 |
+|            1 |
++--------------+
+5 rows in set (0.00 sec)
+
+mysql> select count(model), connection from prepaid group by connection;
++--------------+------------+
+| count(model) | connection |
++--------------+------------+
+|            1 | AirCel     |
+|            3 | Airtel     |
+|            3 | DoCoMo     |
+|            4 | Idea       |
+|            1 | Reliance   |
++--------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select gender from prepaid
+    -> order by validity_days;
++--------+
+| gender |
++--------+
+| NULL   |
+| Female |
+| Male   |
+| Female |
+| Male   |
+| Male   |
+| Female |
+| Male   |
+| Male   |
+| Female |
+| Female |
+| Male   |
++--------+
+12 rows in set (0.00 sec)
+
+mysql> 
